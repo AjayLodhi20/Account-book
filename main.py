@@ -5,11 +5,13 @@ import random
 class Account:
     current_time = dt.datetime.now(timezone.utc)
 
-    def __init__(self, ):
-        account_no = self.account_number()
 
-    def account_number(self):
-        number = '1234567890'
-        new_list = list(number)
-        random.shuffle(new_list)
-        account_no = new_list
+    def __init__(self, account_no, first_name, last_name, offset, balance):
+        self.account_no = account_no
+        self._first_name = first_name
+        self.last_name = last_name
+        self. tz_offset = offset
+        self.balance = balance
+    @property
+    def first_name(self):
+        self._first_name
