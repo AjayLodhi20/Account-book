@@ -1,17 +1,21 @@
 import datetime as dt
-from datetime import timezone
+from datetime import timezone, timedelta
 import random
 
 class Account:
     current_time = dt.datetime.now(timezone.utc)
+    interest = 0.03
+    transaction_id = 0
+    empty_dict = {}
 
 
-    def __init__(self, account_no, first_name, last_name, offset, balance=0):
+    def __init__(self, account_no, first_name, last_name, offset= 5.5, balance=0):
         self.account_no = account_no
         self._first_name = first_name
         self._last_name = last_name
-        self. tz_offset = offset
+        self.tz_offset = offset
         self._balance = balance
+
 
     @property
     def first_name(self):
@@ -35,6 +39,7 @@ class Account:
     @property
     def balance(self):
         if self._balance < 0:
+
             raise ValueError("Balance should be 0 or higher.")
         else:
             return self._balance
@@ -46,6 +51,12 @@ class Account:
     def withdraw(self, amount):
         print(f"{amount} debited...")
         self._balance -= amount
+
+    def int_calc(self):
+        interest = self._balance * Account.interest
+        return interest + self._balance
+
+
 
 
 
