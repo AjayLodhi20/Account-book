@@ -11,7 +11,8 @@ class Account:
         self._first_name = first_name
         self._last_name = last_name
         self. tz_offset = offset
-        self.balance = balance
+        self._balance = balance
+
     @property
     def first_name(self):
         return self._first_name
@@ -27,7 +28,17 @@ class Account:
     def last_name(self, value):
         self._last_name = value
 
+    @property
+    def full_name(self):
+        return f"{self._first_name} {self._last_name}".title()
+
+    @property
+    def balance(self):
+        return self._balance
 
 
 id1 = Account(1234, 'ajay', 'lodhi', 7, 100)
 print(id1.first_name)
+print(id1.full_name)
+print(id1.balance)
+
