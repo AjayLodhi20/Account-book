@@ -6,7 +6,7 @@ class Account:
     current_time = dt.datetime.now(timezone.utc)
     interest = 0.03
     transaction_id = 0
-    empty_dict = {}
+    trans_dict = {}
 
 
     def __init__(self, account_no, first_name, last_name, offset= 5.5, balance=0):
@@ -15,6 +15,7 @@ class Account:
         self._last_name = last_name
         self.tz_offset = offset
         self._balance = balance
+        self.transaction_id = 0
 
 
     @property
@@ -47,13 +48,20 @@ class Account:
     def deposit(self, amount):
         print(f"{amount} credited ...")
         self._balance += amount
+        self.transaction_id += 1
 
     def withdraw(self, amount):
-        print(f"{amount} debited...")
-        self._balance -= amount
+        if amount > self.balance:
+            print("transaction declined...")
+            self.transaction_id += 1
+        else:
+            print(f"{amount} debited...")
+            self._balance -= amount
+            self.transaction_id += 1
 
     def int_calc(self):
         interest = self._balance * Account.interest
+        self.transaction_id += 1
         return interest + self._balance
 
 
@@ -72,4 +80,5 @@ print(id1.balance)
 id1.withdraw(50)
 print(id1.balance)
 
+id1.withdraw(30000)
 
