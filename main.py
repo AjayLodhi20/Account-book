@@ -48,32 +48,18 @@ class Account:
     def deposit(self, amount):
         print(f"{amount} credited ...")
         self._balance += amount
-        Account.transaction_id += 1
         Account.result['Transaction code'] = 'D'
 
     def withdraw(self, amount):
         if amount > self.balance:
             print("transaction declined...")
-            Account.transaction_id += 1
         else:
             print(f"{amount} debited...")
             self._balance -= amount
-            Account.transaction_id += 1
 
     def int_calc(self):
         interest = self._balance * Account.interest
-        Account.transaction_id += 1
         return interest + self._balance
-
-#
-# class Transaction:
-#     transaction_counter = itertools.count(start =0, step =1)
-#     def __init__(self, account_no, transaction_code, mst):
-#         self.account_no = account_no
-#         self.time_utc = dt.datetime.now(timezone.utc)
-#         self.time = self.time_utc.astimezone(timezone(timedelta(hours= mst)))
-#         self.transaction_id = next(self.transaction_counter)
-#         self.transaction_code = transaction_code
 
 class Transaction:
     transaction_counter = itertools.count(start=0, step=1)
